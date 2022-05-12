@@ -1,0 +1,53 @@
+version: '3'
+services:
+  remix-dev:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      target: dev-remix
+    volumes:
+      - ./frontend/public:/app/public
+      - ./frontend/server.js:/app/server.js
+      - ./frontend/build:/app/build
+
+  server:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      target: dev-node-server
+    volumes:
+      - ./frontend/server.js:/app/server.js
+      - ./frontend/build:/app/build
+      - ./frontend/node_modules:/app/node_modules
+    ports:
+      - "8081:8081"
+    depends_on:
+      - remix-dev
+
+  public:
+    image: nginx:latest
+    restart: always
+    environment:
+      TZ: Asia/Tokyo
+    volumes:
+      - ./frontend/docker_env/public/nginx/conf.d:/etc/nginx/conf.d
+      - ./frontend/docker_env/public/nginx/logs:/var/log/nginx
+      - ./frontend/public:/etc/nginx/public
+    ports:
+      - "8082:80"
+    depends_on:
+      - remix-dev
+
+  proxy:
+    image: nginx:latest
+    restart: always
+    environment:
+      TZ: Asia/Tokyo
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "8080:80"
+    depends_on:
+      - server
+      - public
+
