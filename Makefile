@@ -1,8 +1,15 @@
-up:
-	$(MAKE) -f docker.mk up
+.PHONY: all install build dev frontend/%
 
-restart:
-	$(MAKE) -f docker.mk restart
+all: install dev
 
-stop:
-	$(MAKE) -f docker.mk stop
+install: frontend/install
+
+build: frontend/build
+
+dev: build
+	cd frontend && \
+		npm run build
+	docker compose -f docker-compose.dev.yaml up --build
+
+frontend/%:
+	$(MAKE) -C frontend $*
