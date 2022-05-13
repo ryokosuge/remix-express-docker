@@ -27,19 +27,29 @@ COPY --from=deps /app/node_modules /app/node_modules
 COPY . .
 RUN npm run build
 
-FROM base as dev-node-server
-
-ENV PORT="8081"
+FROM base as node-server-base
 
 WORKDIR /app
 
-COPY --from=deps /app/package.json /app/package.json
-COPY --from=deps /app/package-lock.json /app/package-lock.json
-COPY --from=deps /app/node_modules /app/node_modules
+COPY --from=production-deps /app/node_modules /app/node_modules
 COPY --from=build /app/build /app/build
 COPY --from=build /app/server.js /app/server.js
 
-CMD ["npm", "run", "dev:node"]
+FROM node-server-base as production-node-server
+
+ENV PORT=8081
+ENV NODE_ENV=production
+
+CMD ["node", "/app/server.js"]
+
+FROM node-server-base as dev-node-server
+
+ENV PORT=8081
+ENV NODE_ENV=development
+
+RUN npm i -g nodemon
+
+CMD ["nodemon", "/app/server.js", "--watch", "/app/server.js"]
 
 FROM base as dev-remix
 

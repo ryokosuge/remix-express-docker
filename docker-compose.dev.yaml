@@ -1,16 +1,18 @@
 version: '3'
 services:
-  remix-dev:
+  remix-build:
+    container_name: remix-build
     build:
       context: ./frontend
       dockerfile: Dockerfile
       target: dev-remix
     volumes:
+      - ./frontend/app:/app/app
       - ./frontend/public:/app/public
       - ./frontend/server.js:/app/server.js
       - ./frontend/build:/app/build
-
-  server:
+  remix-server:
+    container_name: remix-server 
     build:
       context: ./frontend
       dockerfile: Dockerfile
@@ -22,9 +24,9 @@ services:
     ports:
       - "8081:8081"
     depends_on:
-      - remix-dev
-
-  public:
+      - remix-build
+  remix-public:
+    container_name: remix-public
     image: nginx:latest
     restart: always
     environment:
@@ -36,9 +38,9 @@ services:
     ports:
       - "8082:80"
     depends_on:
-      - remix-dev
-
-  proxy:
+      - remix-build
+  nginx-proxy:
+    container_name: nginx-proxy
     image: nginx:latest
     restart: always
     environment:
@@ -48,6 +50,6 @@ services:
     ports:
       - "8080:80"
     depends_on:
-      - server
-      - public
+      - remix-server
+      - remix-public
 
