@@ -5,12 +5,13 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-      target: dev-remix
+      target: watch-dev
     volumes:
       - ./frontend/app:/app/app
       - ./frontend/public:/app/public
-      - ./frontend/server.js:/app/server.js
+      - ./frontend/server:/app/server
       - ./frontend/build:/app/build
+    tty: true
   remix-server:
     container_name: remix-server 
     build:
@@ -20,7 +21,7 @@ services:
     environment:
       - NODE_ENV=development
     volumes:
-      - ./frontend/server.js:/app/server.js
+      - ./frontend/server/index.js:/app/index.js
       - ./frontend/build:/app/build
       - ./frontend/node_modules:/app/node_modules
     ports:

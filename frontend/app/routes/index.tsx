@@ -26,7 +26,6 @@ export default function Index() {
             Remix Docs
           </a>
         </li>
-        <li>hoge</li>
       </ul>
     </div>
   );
