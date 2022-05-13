@@ -1,7 +1,7 @@
 version: '3'
 services:
-  remix-build:
-    container_name: remix-build
+  remix-watch:
+    container_name: remix-watch
     build:
       context: ./frontend
       dockerfile: Dockerfile
@@ -17,6 +17,8 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
       target: dev-node-server
+    environment:
+      - NODE_ENV=development
     volumes:
       - ./frontend/server.js:/app/server.js
       - ./frontend/build:/app/build
@@ -24,7 +26,7 @@ services:
     ports:
       - "8081:8081"
     depends_on:
-      - remix-build
+      - remix-watch
   remix-public:
     container_name: remix-public
     image: nginx:latest
@@ -32,13 +34,13 @@ services:
     environment:
       TZ: Asia/Tokyo
     volumes:
-      - ./frontend/docker_env/public/nginx/conf.d:/etc/nginx/conf.d
-      - ./frontend/docker_env/public/nginx/logs:/var/log/nginx
+      - ./docker_env/remix-public/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./docker_env/remix-public/logs:/var/log/nginx
       - ./frontend/public:/etc/nginx/public
     ports:
       - "8082:80"
     depends_on:
-      - remix-build
+      - remix-watch
   nginx-proxy:
     container_name: nginx-proxy
     image: nginx:latest
@@ -46,10 +48,13 @@ services:
     environment:
       TZ: Asia/Tokyo
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./docker_env/nginx-proxy/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./docker_env/nginx-proxy/logs:/var/log/nginx
     ports:
       - "8080:80"
+      - "8002:8002"
     depends_on:
       - remix-server
       - remix-public
+      - remix-watch
 

@@ -26,10 +26,7 @@ export default function Index() {
             Remix Docs
           </a>
         </li>
-        <li>テスト</li>
-        <li>テスと２</li>
-        <li>テスと3</li>
-        <li>テスと4</li>
+        <li>hoge</li>
       </ul>
     </div>
   );
