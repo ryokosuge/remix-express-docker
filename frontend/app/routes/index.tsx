@@ -1,6 +1,6 @@
-import type { FC } from "react";
+import React from "react";
 
-const IndexRoute: FC<{}> = () => {
+const IndexRoute: React.FC<{}> = () => {
   return (
     <div className="flex overflow-hidden relative flex-col justify-center py-6 min-h-screen bg-gray-50 sm:py-12">
       <div className="relative px-6 pt-10 pb-8 bg-white ring-1 ring-gray-900/5 shadow-xl sm:px-10 sm:mx-auto sm:max-w-lg sm:rounded-lg">
