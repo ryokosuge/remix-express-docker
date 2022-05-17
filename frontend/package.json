@@ -7,9 +7,13 @@
     "build": "run-p build:*",
     "build:remix": "remix build",
     "build:server": "esbuild --platform=node --format=cjs ./server/index.ts --outdir=./server",
+    "build:css": "npm run generate:css -m",
     "watch": "run-p watch:*",
     "watch:remix": "remix watch",
-    "watch:server": "npm run build:server -- --watch"
+    "watch:server": "npm run build:server -- --watch",
+    "watch:css": "npm run generate:css -- -w",
+    "generate": "run-p generate:*",
+    "generate:css": "tailwindcss -i ./styles/tailwind.css -o ./app/styles/tailwind.css"
   },
   "dependencies": {
     "@remix-run/express": "1.4.3",
@@ -30,9 +34,14 @@
     "@types/morgan": "1.9.3",
     "@types/react": "18.0.9",
     "@types/react-dom": "18.0.4",
+    "autoprefixer": "10.4.7",
+    "concurrently": "7.2.0",
     "esbuild": "0.14.39",
     "eslint": "8.15.0",
+    "eslint-plugin-tailwindcss": "^3.5.0",
     "npm-run-all": "4.1.5",
+    "postcss": "8.4.13",
+    "tailwindcss": "3.0.24",
     "typescript": "4.6.4"
   },
   "engines": {

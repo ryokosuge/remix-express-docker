@@ -11,6 +11,7 @@ services:
       - ./frontend/public:/app/public
       - ./frontend/server:/app/server
       - ./frontend/build:/app/build
+      - ./frontend/styles:/app/styles
     tty: true
   remix-server:
     container_name: remix-server 

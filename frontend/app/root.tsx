@@ -1,4 +1,4 @@
-import type { MetaFunction } from "@remix-run/node";
+import type { LinksFunction, MetaFunction } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -8,9 +8,13 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 
+import styles from "./styles/tailwind.css";
+
+export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
+
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
-  title: "New Remix App",
+  title: "Remix App",
   viewport: "width=device-width,initial-scale=1",
 });
 
@@ -21,7 +25,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="h-full">
         <Outlet />
         <ScrollRestoration />
         <Scripts />
