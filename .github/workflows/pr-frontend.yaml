@@ -13,7 +13,7 @@ env:
 
 jobs:
   lint:
-    runs-on: ${{ env.RUNS_ON_OS }}
+    runs-on: "${{ env.RUNS_ON_OS }}"
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
