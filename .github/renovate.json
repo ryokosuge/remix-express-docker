@@ -12,6 +12,22 @@
   },
   "packageRules": [
     {
+      "groupName": "remix-run",
+      "matchPackagePatterns": [
+        "^@remix-run/"
+      ],
+      "automerge": false
+    },
+    {
+      "packagePatterns": [
+        "^@types/"
+      ],
+      "automerge": true,
+      "major": {
+        "automerge": false
+      }
+    },
+    {
       "matchUpdateTypes": [
         "minor",
         "patch",
