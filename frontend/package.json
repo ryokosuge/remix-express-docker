@@ -14,7 +14,9 @@
     "watch:css": "npm run generate:css -- -w",
     "generate": "run-p generate:*",
     "generate:css": "tailwindcss -i ./styles/tailwind.css -o ./app/styles/tailwind.css",
-    "test": "vitest",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:update": "npm run test -- --update",
     "lint": "eslint app --ext ts,tsx",
     "lint:fix": "npm run lint -- --fix"
   },
