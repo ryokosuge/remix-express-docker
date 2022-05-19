@@ -1,0 +1,21 @@
+name: frontend
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "frontend/**"
+
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: install
+        run: make -C frontend install
+      - name: test
+        run: make -C frontend test
