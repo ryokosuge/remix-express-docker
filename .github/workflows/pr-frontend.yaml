@@ -1,0 +1,35 @@
+name: frontend
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "frontend/**"
+
+env:
+  NODE_VERSION: 16
+
+jobs:
+  lint:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: install
+        run: make -C frontend install
+      - name: lint
+        run: make -C frontend lint
+  test:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: install
+        run: make -C frontend install
+      - name: test
+        run: make -C frontend test
