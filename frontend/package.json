@@ -41,7 +41,7 @@
     "@types/react-dom": "18.0.4",
     "@types/react-test-renderer": "18.0.0",
     "autoprefixer": "10.4.7",
-    "concurrently": "7.2.0",
+    "concurrently": "7.2.1",
     "esbuild": "0.14.39",
     "eslint": "8.16.0",
     "eslint-config-prettier": "8.5.0",
