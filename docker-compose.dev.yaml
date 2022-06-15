@@ -58,5 +58,4 @@ services:
     depends_on:
       - remix-server
       - remix-public
-      - remix-watch
 
