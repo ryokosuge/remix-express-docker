@@ -1,0 +1,33 @@
+# EditorConfig is awesome: http://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+[*]
+insert_final_newline = true
+
+[**.conf]
+indent_style = tab
+indent_size = 4
+
+[Makefile]
+indent_style = tab
+indent_size = 4
+
+[{**.json,**.jsonnet,**.libsonnet}]
+indent_size = 2
+
+[{**.js,**.ts,**.tsx,**.css}]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 2
+
+[**.json]
+indent_style = space
+indent_size = 2
+
+
+[{.eslintrc,.prettierrc}]
+indent_style = space
+indent_size = 2
