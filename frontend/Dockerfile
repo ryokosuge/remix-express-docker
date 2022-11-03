@@ -1,4 +1,4 @@
-FROM node:18-bullseye-slim as base
+FROM node:19-bullseye-slim as base
 
 # deps
 FROM base as deps
