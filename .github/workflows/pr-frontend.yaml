@@ -5,31 +5,32 @@ on:
     branches:
       - main
     paths:
-      - "frontend/**"
+      - "web/**"
 
 env:
+  UBUNTU_VERSION: ubuntu-22.04
   NODE_VERSION: 18
 
 jobs:
   lint:
-    runs-on: ubuntu-22.04
+    runs-on: ${{ env.UBUNTU_VERSION }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
       - name: install
-        run: make -C frontend install
+        run: make web/install
       - name: lint
-        run: make -C frontend lint
+        run: make web/lint
   test:
-    runs-on: ubuntu-22.04
+    runs-on: ${{ env.UBUNTU_VERSION }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
       - name: install
-        run: make -C frontend install
+        run: make web/install
       - name: test
-        run: make -C frontend test
+        run: make web/test

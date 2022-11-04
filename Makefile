@@ -2,16 +2,17 @@
 
 all: install dev
 
-install: frontend/install
+install: web/install
 
-build: frontend/build
+build: web/build
 
 dev: build
 	docker compose -f docker-compose.dev.yaml up --build
 
-test: frontend/test
+test: web/test
 
-lint: frontend/lint
+lint: web/lint
 
-frontend/%:
-	$(MAKE) -C frontend $*
+.PHONY: web/%
+web/%:
+	$(MAKE) -C web $*
