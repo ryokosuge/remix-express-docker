@@ -7,31 +7,31 @@
 ```
 ❯ docker version
 Client:
- Cloud integration: v1.0.24
- Version:           20.10.14
+ Cloud integration: v1.0.29
+ Version:           20.10.20
  API version:       1.41
- Go version:        go1.16.15
- Git commit:        a224086
- Built:             Thu Mar 24 01:49:20 2022
+ Go version:        go1.18.7
+ Git commit:        9fdeb9c
+ Built:             Tue Oct 18 18:20:35 2022
  OS/Arch:           darwin/amd64
  Context:           default
  Experimental:      true
 
-Server: Docker Desktop 4.8.1 (78998)
+Server: Docker Desktop 4.13.1 (90346)
  Engine:
-  Version:          20.10.14
+  Version:          20.10.20
   API version:      1.41 (minimum version 1.12)
-  Go version:       go1.16.15
-  Git commit:       87a90dc
-  Built:            Thu Mar 24 01:46:14 2022
+  Go version:       go1.18.7
+  Git commit:       03df974
+  Built:            Tue Oct 18 18:18:35 2022
   OS/Arch:          linux/amd64
   Experimental:     false
  containerd:
-  Version:          1.5.11
-  GitCommit:        3df54a852345ae127d1fa3092b95168e4a88e2f8
+  Version:          1.6.8
+  GitCommit:        9cd3357b7fd7218e4aec3eae239db1f68a5a6ec6
  runc:
-  Version:          1.0.3
-  GitCommit:        v1.0.3-0-gf46b6ba
+  Version:          1.1.4
+  GitCommit:        v1.1.4-0-g5fd4c4d
  docker-init:
   Version:          0.19.0
   GitCommit:        de40ad0
@@ -39,7 +39,7 @@ Server: Docker Desktop 4.8.1 (78998)
 
 ```
 ❯ docker compose version
-Docker Compose version v2.5.0
+Docker Compose version v2.12.1
 ```
 
 ## dev
