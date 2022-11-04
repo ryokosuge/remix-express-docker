@@ -3,28 +3,28 @@ services:
   remix-watch:
     container_name: remix-watch
     build:
-      context: ./frontend
+      context: ./web
       dockerfile: Dockerfile
       target: watch-dev
     volumes:
-      - ./frontend/app:/app/app
-      - ./frontend/public:/app/public
-      - ./frontend/server:/app/server
-      - ./frontend/build:/app/build
-      - ./frontend/styles:/app/styles
+      - ./web/app:/app/app
+      - ./web/public:/app/public
+      - ./web/server:/app/server
+      - ./web/build:/app/build
+      - ./web/styles:/app/styles
     tty: true
   remix-server:
     container_name: remix-server 
     build:
-      context: ./frontend
+      context: ./web
       dockerfile: Dockerfile
       target: dev-node-server
     environment:
       - NODE_ENV=development
     volumes:
-      - ./frontend/server/index.js:/app/index.js
-      - ./frontend/build:/app/build
-      - ./frontend/node_modules:/app/node_modules
+      - ./web/server/index.js:/app/index.js
+      - ./web/build:/app/build
+      - ./web/node_modules:/app/node_modules
     ports:
       - "8081:8081"
     depends_on:
@@ -38,7 +38,7 @@ services:
     volumes:
       - ./docker_env/remix-public/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./docker_env/remix-public/logs:/var/log/nginx
-      - ./frontend/public:/etc/nginx/public
+      - ./web/public:/etc/nginx/public
     ports:
       - "8082:80"
     depends_on:

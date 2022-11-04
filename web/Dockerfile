@@ -6,18 +6,18 @@ FROM base as deps
 WORKDIR /app
 
 COPY ./package.json /app/package.json
-COPY ./package-lock.json /app/package-lock.json
+COPY ./yarn.lock /app/yarn.lock
 
-RUN npm i
+RUN yarn
 
 FROM base as production-deps
 
 WORKDIR /app
 
 COPY ./package.json /app/package.json
-COPY ./package-lock.json /app/package-lock.json
+COPY ./yarn.lock /app/yarn.lock
 
-RUN npm i --production
+RUN yarn --production
 
 FROM base as build
 
@@ -55,4 +55,4 @@ FROM build as watch-dev
 
 WORKDIR /app
 
-CMD ["npm", "run", "watch"]
+CMD ["yarn", "watch"]
